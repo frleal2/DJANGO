@@ -18,10 +18,15 @@ from django.contrib import admin
 from django.urls import path
 from cars import views
 from rest_framework.urlpatterns import format_suffix_patterns
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
 
 urlpatterns = [
+    path('api/token/', TokenObtainPairView.as_view(), name = "token_obtain_pair"),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name = "token_refresh"),
     path('admin/', admin.site.urls),
     path('api/cars/', views.car_list),
+    path('api/cars/addCar' , views.addCar_to_list),
     path('api/cars/<int:id>', views.car_detail)
 ]
 
